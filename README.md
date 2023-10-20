@@ -9,8 +9,6 @@
 
 ## Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
 - PHP 8+.
 - [Laravel 10](https://laravel.com/docs/10.x/installation).
 - [Node.Js 18+](https://nodejs.org/en).
