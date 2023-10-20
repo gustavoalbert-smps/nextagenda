@@ -13,6 +13,7 @@
 - [Laravel 10](https://laravel.com/docs/10.x/installation).
 - [Node.Js 18+](https://nodejs.org/en).
 - [Vue.Js 3.3.4](https://vuejs.org/guide/quick-start.html#quick-start).
+- [Vue Router 4](https://router.vuejs.org/installation.html).
 
 ## About the project
 
