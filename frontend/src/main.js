@@ -1,5 +1,6 @@
 import './assets/main.css'
 import './axios'
+import './index.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
