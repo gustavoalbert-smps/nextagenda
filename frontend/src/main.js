@@ -1,6 +1,7 @@
 import './assets/main.css'
 import './axios'
 import './index.css'
+import 'boxicons/css/boxicons.min.css';
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
