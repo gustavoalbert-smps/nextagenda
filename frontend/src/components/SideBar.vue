@@ -1,8 +1,8 @@
 <template>
     <div class="sidebar fixed left-0 top-0 h-full w-78-px bg-custom-dark-blue">
         <div class="logo-details flex relative items-center">
-            <i class='bx bxl-c-plus-plus icon'></i>
-            <div class="logo_name"></div>
+            <img src="../assets/nextagenda-icon.svg" alt="logo Image" class="icon" width="62px">
+            <div class="logo_name">NEXTAGENDA</div>
             <i class='bx bx-menu' id="sidebar-menu"></i>
         </div>
         <ul class="nav-list">
