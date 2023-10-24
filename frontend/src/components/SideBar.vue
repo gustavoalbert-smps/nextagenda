@@ -39,11 +39,12 @@
 <script>
 export default {
   mounted() {
-    let sidebar = document.querySelector(".sidebar");
-    let closeBtn = document.querySelector("#sidebar-menu");
+    let sidebar = document.querySelector(".sidebar"),
+      closeBtn = document.querySelector("#sidebar-menu");
     
     closeBtn.addEventListener("click", () => {
       sidebar.classList.toggle("open");
+      this.$emit("sidebarToggled");
       menuBtnChange();
     });
     

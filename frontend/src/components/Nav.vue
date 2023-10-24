@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex items-center bg-custom-dark-blue p-6">
+    <nav id="system-nav" class="flex items-center bg-custom-dark-blue p-6">
         
         <div class="w-full">
             <div class="float-right">
