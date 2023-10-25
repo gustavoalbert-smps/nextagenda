@@ -26,10 +26,13 @@ export default {
       const navBarWidth = screenWidth - sidebarWidth;
       const navBarLeft = sidebarWidth;
 
-      navBar.style.width = navBarWidth + "px";
+      navBar.style.width = navBarWidth + "px" ;
       navBar.style.left = navBarLeft + "px";
       navBar.style.transition = "all 0.5s ease";
     }
+  },
+  mounted() {
+    this.adjustNavBar();
   },
 };
 </script>

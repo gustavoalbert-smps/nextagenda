@@ -1,23 +1,34 @@
 <template>
-    <nav id="system-nav" class="flex items-center bg-custom-dark-blue p-6">
-        
-        <div class="w-full">
-            <div class="float-right">
-                <a href="#"
-                    class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a>
+    <nav id="system-nav" class="flex items-center bg-custom-dark-blue p-6 w-screen">
+        <div class="flex flex-row justify-between w-full">
+            <div class="lg:w-96 md:w-64 mx-auto">
+                <div class="relative rounded-md shadow-sm w-full">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class='bx bx-search text-zinc-900'></i>
+                    </div>
+                    <input type="text" name="nav-search" id="nav-search"
+                        class="block w-full rounded-lg border-0 py-1.5 pl-7 pr-20 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-500 sm:text-sm sm:leading-6"
+                        placeholder="Pesquisar">
+                </div>
+            </div>
+            <div class="w-44 flex items-center">
+                <div class="">
+                    <p>teste</p>
+                </div>
             </div>
         </div>
     </nav>
 </template>
 
-<script setup>
-
+<script>
 </script>
 
 <style>
 nav {
     position: absolute;
     top: 0;
-    left: 0; 
-    width: 100%;
-}</style>
+    left: 78px;
+}
+
+
+</style>
