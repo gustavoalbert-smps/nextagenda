@@ -7,7 +7,7 @@
                         <i class='bx bx-search text-zinc-900'></i>
                     </div>
                     <input type="text" name="nav-search" id="nav-search"
-                        class="block w-full rounded-lg border-0 py-1.5 pl-7 pr-20 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-500 sm:text-sm sm:leading-6"
+                        class="block w-full rounded-lg border-0 py-1.5 pl-7 pr-20 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         placeholder="Pesquisar">
                 </div>
             </div>

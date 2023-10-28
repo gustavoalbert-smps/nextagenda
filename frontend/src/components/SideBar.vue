@@ -1,39 +1,42 @@
 <template>
-    <div class="sidebar fixed left-0 top-0 h-full w-78-px bg-custom-dark-blue">
-        <div class="logo-details flex relative items-center">
-            <img src="../assets/nextagenda-icon.svg" alt="logo Image" class="icon" width="62px">
-            <div class="logo_name">NEXTAGENDA</div>
-            <i class='bx bx-menu' id="sidebar-menu"></i>
-        </div>
-        <ul class="nav-list">
-            <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="sblink_name">Dashboard</span>
-                </a>
-                <span class="tooltip">Dashboard</span>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bxs-calendar'></i>
-                    <span class="sblink_name">Agendas</span>
-                </a>
-                <span class="tooltip">Agendas</span>
-            </li>
-            <li class="profile">
-                <div class="profile-details">
-                    <img src="" alt="Profile Image">
-                    <div class="name_job">
-                        <div class="name">                
-                        </div>
-                        <div class="job">
-                        </div>
-                    </div>
-                </div>
-                <i class='bx bx-log-out' id="log_out"></i>
-            </li>
-        </ul>
+  <div class="sidebar fixed left-0 top-0 h-full w-78-px bg-custom-dark-blue">
+    <div class="logo-details flex relative items-center">
+      <img
+        src="../assets/nextagenda-icon.svg"
+        alt="logo Image"
+        class="icon"
+        width="62px"
+      />
+      <div class="logo_name">NEXTAGENDA</div>
+      <i class="bx bx-menu" id="sidebar-menu"></i>
     </div>
+    <ul class="nav-list">
+      <li>
+        <a href="#" class="dashboard_link">
+          <i class="bx bx-grid-alt"></i>
+          <span class="sblink_name">Dashboard</span>
+        </a>
+        <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a href="#" class="dashboard_link">
+          <i class="bx bxs-calendar"></i>
+          <span class="sblink_name">Agendas</span>
+        </a>
+        <span class="tooltip">Agendas</span>
+      </li>
+      <li class="profile">
+        <div class="profile-details">
+          <img src="" alt="Profile Image" />
+          <div class="name_job">
+            <div class="name"></div>
+            <div class="job"></div>
+          </div>
+        </div>
+        <i class="bx bx-log-out" id="log_out"></i>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -41,13 +44,13 @@ export default {
   mounted() {
     let sidebar = document.querySelector(".sidebar"),
       closeBtn = document.querySelector("#sidebar-menu");
-    
+
     closeBtn.addEventListener("click", () => {
       sidebar.classList.toggle("open");
       this.$emit("sidebarToggled");
       menuBtnChange();
     });
-    
+
     function menuBtnChange() {
       if (sidebar.classList.contains("open")) {
         closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
@@ -55,18 +58,18 @@ export default {
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
-  }
-}
+  },
+};
 </script>
 
 <style>
 :root {
-    --custom-red: #e8bcb9ff;
-    --custom-brown: #f39f5aff;
-    --custom-redwood: #ae445aff;
-    --custom-purple: #662549ff;
-    --custom-violet: #451955ff;
-    --custom-darkblue: #1d1a39ff;
+  --custom-red: #e8bcb9ff;
+  --custom-brown: #f39f5aff;
+  --custom-redwood: #ae445aff;
+  --custom-purple: #662549ff;
+  --custom-violet: #451955ff;
+  --custom-darkblue: #1d1a39ff;
 }
 
 .sidebar {
@@ -137,7 +140,7 @@ export default {
   list-style: none;
 }
 .sidebar li .tooltip {
-    color: #11101d;
+  color: #11101d;
   position: absolute;
   top: -20px;
   left: calc(100% + 15px);
@@ -191,9 +194,6 @@ export default {
   background: #11101d;
 }
 
-.sidebar li:hover {
-    border: 5px solid var(--custom-purple);
-}
 .sidebar li a:hover {
   background: #fff;
 }
@@ -301,3 +301,10 @@ export default {
 }
 </style>
 
+<style lang="scss">
+$tod-tri: #ff00ff;
+
+.dashboard_link:hover {
+  filter: drop-shadow(0px 0px 10px $tod-tri) drop-shadow(-1px -1px 10px $tod-tri);
+}
+</style>
