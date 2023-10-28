@@ -12,17 +12,17 @@
     </div>
     <ul class="nav-list">
       <li>
-        <a href="#" class="dashboard_link">
+        <RouterLink class="dashboard_link" :to="{name: 'Home'}">
           <i class="bx bx-grid-alt"></i>
           <span class="sblink_name">Dashboard</span>
-        </a>
+        </RouterLink>
         <span class="tooltip">Dashboard</span>
       </li>
       <li>
-        <a href="#" class="dashboard_link">
+        <RouterLink class="dashboard_link" :to="{name: 'Agenda'}">
           <i class="bx bxs-calendar"></i>
           <span class="sblink_name">Agendas</span>
-        </a>
+        </RouterLink>
         <span class="tooltip">Agendas</span>
       </li>
       <li class="profile">
@@ -40,25 +40,26 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
-  mounted() {
-    let sidebar = document.querySelector(".sidebar"),
-      closeBtn = document.querySelector("#sidebar-menu");
-
-    closeBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
-      this.$emit("sidebarToggled");
-      menuBtnChange();
-    });
-
-    function menuBtnChange() {
-      if (sidebar.classList.contains("open")) {
-        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-      } else {
-        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-      }
-    }
-  },
+    mounted() {
+        let sidebar = document.querySelector(".sidebar"), closeBtn = document.querySelector("#sidebar-menu");
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            this.$emit("sidebarToggled");
+            menuBtnChange();
+        });
+        function menuBtnChange() {
+            if (sidebar.classList.contains("open")) {
+                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            }
+            else {
+                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+            }
+        }
+    },
+    components: { RouterLink }
 };
 </script>
 
