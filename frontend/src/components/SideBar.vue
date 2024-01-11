@@ -18,13 +18,13 @@
         </RouterLink>
         <span class="tooltip">Dashboard</span>
       </li>
-      <li>
+      <!-- <li>
         <RouterLink class="dashboard_link" :to="{name: 'Agenda'}">
           <i class="bx bxs-calendar"></i>
           <span class="sblink_name">Agendas</span>
         </RouterLink>
         <span class="tooltip">Agendas</span>
-      </li>
+      </li> -->
       <li class="profile">
         <div class="profile-details">
           <img src="" alt="Profile Image" />
