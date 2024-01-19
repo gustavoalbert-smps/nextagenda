@@ -9,12 +9,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-red': '#e8bcb9ff',
-        'custom-brown': '#f39f5aff',
-        'custom-redwood': '#ae445aff',
-        'custom-purple': '#662549ff',
-        'custom-violet': '#451955ff',
-        'custom-dark-blue': '#1d1a39ff',
+        'theme-light-red': '#e8bcb9ff',
+        'theme-yellow': '#f39f5aff',
+        'theme-redwood': '#ae445aff',
+        'theme-purple': '#662549ff',
+        'theme-violet': '#451955ff',
+        'theme-dark-blue': '#1d1a39ff',
+        'theme-light-blue': '#56547dff',
       }
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar fixed left-0 top-0 h-full w-78-px bg-custom-dark-blue">
+  <div class="sidebar fixed left-0 top-0 h-full w-78-px bg-theme-dark-blue">
     <div class="logo-details flex relative items-center">
       <img
         src="../assets/nextagenda-icon.svg"
@@ -12,7 +12,7 @@
     </div>
     <ul class="nav-list">
       <li>
-        <RouterLink class="dashboard_link" :to="{name: 'Home'}">
+        <RouterLink class="dashboard_link" :to="{name: 'home'}">
           <i class="bx bx-grid-alt"></i>
           <span class="sblink_name">Dashboard</span>
         </RouterLink>
@@ -64,14 +64,6 @@ export default {
 </script>
 
 <style>
-:root {
-  --custom-red: #e8bcb9ff;
-  --custom-brown: #f39f5aff;
-  --custom-redwood: #ae445aff;
-  --custom-purple: #662549ff;
-  --custom-violet: #451955ff;
-  --custom-darkblue: #1d1a39ff;
-}
 
 .sidebar {
   position: fixed;

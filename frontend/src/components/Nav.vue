@@ -1,5 +1,5 @@
 <template>
-    <nav id="system-nav" class="flex items-center bg-custom-dark-blue p-6 w-screen">
+    <nav id="system-nav" class="flex items-center bg-theme-dark-blue p-6 w-screen">
         <div class="flex flex-row justify-between w-full">
             <div class="lg:w-96 md:w-64 mx-auto">
                 <div class="relative rounded-md shadow-sm w-full">

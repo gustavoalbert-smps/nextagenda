@@ -17,7 +17,7 @@ const showNavbar = ref(true);
 onMounted(async () => {
   await router.isReady();
 
-  const pathsToHideSideBarAndNav = ["/login","/register"];
+  const pathsToHideSideBarAndNav = ["/login","/cadastrar"];
   
   if (pathsToHideSideBarAndNav.includes(route.path)) {
     showSidebar.value = false;
