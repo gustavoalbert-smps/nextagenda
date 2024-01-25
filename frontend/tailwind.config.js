@@ -16,6 +16,7 @@ module.exports = {
         'theme-violet': '#451955ff',
         'theme-dark-blue': '#1d1a39ff',
         'theme-light-blue': '#56547dff',
+        'theme-dark-text': '#0e0e10'
       }
     },
   },

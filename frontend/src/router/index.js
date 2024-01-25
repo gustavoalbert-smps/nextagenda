@@ -5,7 +5,8 @@ import Home from "../views/Home.vue";
 const routes = [
     { path: '/', name: "home",component: Home},
     { path: '/login', name: "login", component: () => import("../views/Login.vue")},
-    { path: '/cadastrar', name: "cadastrar", component: () => import("../views/Register.vue")}
+    { path: '/cadastrar', name: "cadastrar", component: () => import("../views/Register.vue")},
+    { path: '/go-to-confirmation', name: "goToConfirmation", component: () => import("../views/GoToConfirmation.vue")}
 ];
 
 const router = createRouter({

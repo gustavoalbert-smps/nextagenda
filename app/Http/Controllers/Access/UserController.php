@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Access;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -28,9 +30,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        try {
+            $data = $request->all();
+    
+            $data['password'] = Crypt::encryptString($data['password']);
+    
+            $user = User::create($data);
 
-        return response()->json(['msg' => 'Dados recebidos com sucesso!','data' => $data]);
+            return response()->json(['message' => 'Usuário criado com sucesso', 'data' => $user]);
+        } catch (\Exception $exception) {
+            return response()->json(['message' => 'Houve um erro ao realizar o seu cadastro'],500);
+        }
+
     }
 
     /**

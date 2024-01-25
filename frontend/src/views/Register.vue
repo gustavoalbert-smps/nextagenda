@@ -36,6 +36,7 @@
 <script>
 import App from '../App.vue';
 import axios from "axios";
+import {useUserStore} from '../stores/userStore.js';
 
 export default {
     components: {
@@ -62,7 +63,9 @@ export default {
                 await this.getToken();
                 const response = await axios.post("/api/cadastrar", this.formData);
 
-                console.log(response.data);
+                useUserStore().setUser(response.data);
+
+                this.$router.push('/go-to-confirmation');
             } catch (error) {
                 console.error('Erro ao enviar dados:', error);
             }
