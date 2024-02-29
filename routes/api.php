@@ -21,5 +21,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'Access', 'prefix' => 'api'], function () {
 
+    Route::post('/search-user', [UserController::class, 'searchUser']);
     Route::post('/cadastrar', [UserController::class, 'store']);
-});
+})->middleware(['auth:sanctum']);

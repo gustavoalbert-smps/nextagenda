@@ -54,14 +54,11 @@ export default {
             }
         };
     },
-    methods: {
-        getToken: async () => {
-            await axios.get("/sanctum/csrf-cookie");
-        },
+    methods: {        
         async submitForm() {
             try {
                 await this.getToken();
-                const response = await axios.post("/api/cadastrar", this.formData);
+                const response = await axios.post("/register", this.formData);
 
                 useUserStore().setUser(response.data);
 

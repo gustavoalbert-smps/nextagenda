@@ -25,7 +25,7 @@ class User extends Authenticatable
         'birth'
     ];
 
-    protected $appends = ['short_name'];
+    protected $appends = ['first_name'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,8 +47,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getShortNameAttribute()
+    public function getFirstNameAttribute()
     {
-        return shortName($this->name);
+        return getName($this->name, 1);
     }
 }

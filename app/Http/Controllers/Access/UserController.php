@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
+    public function searchUser(Request $request)
+    {
+        try {
+            $type = filter_var($request->type, filter:FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+            
+            $user = User::where($type,$request->type)->first();
+
+            return response()->json(['message' => 'Pesquisa realizada com sucesso!', 'data' => (!empty($user) ? $user->first_name : null)]);
+        } catch (\Exception $exception) {
+            \Log::error("Houve um erro ao pesquisar o usuário com este login: " . $exception->getMessage() . $exception->getLine());
+
+            return response()->json(['message' => 'Houve um erro ao pesquisar o usuário com este login.'],500);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      */
