@@ -20,7 +20,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->json(['message' => 'sessão de usuário criada com sucesso!']);
+        return response()->json(['message' => 'sessão de usuário criada com sucesso!', 'data' => Auth::user()]);
     }
 
     /**

@@ -33,7 +33,7 @@
             <div class="job"></div>
           </div>
         </div>
-        <i class="bx bx-log-out" id="log_out"></i>
+        <a @click.prevent="userStore.logout"><i class="bx bx-log-out" id="log_out"></i></a>        
       </li>
     </ul>
   </div>
@@ -41,8 +41,19 @@
 
 <script>
 import { RouterLink } from 'vue-router';
+import { defineComponent } from 'vue';
 
-export default {
+import { useUserStore } from '../stores/userStore';
+
+export default defineComponent({
+    name: 'sidebar-component',
+    setup() {
+        const userStore = useUserStore();
+        
+        return {
+            userStore
+        }
+    },
     mounted() {
         let sidebar = document.querySelector(".sidebar"), closeBtn = document.querySelector("#sidebar-menu");
         closeBtn.addEventListener("click", () => {
@@ -60,7 +71,7 @@ export default {
         }
     },
     components: { RouterLink }
-};
+});
 </script>
 
 <style>

@@ -9,9 +9,12 @@
   </template>
 
 <script>
-    export default {
+import { defineComponent } from 'vue';
+
+    export default defineComponent({
+        name: 'alert-component',
         props: ['icon','type','show']        
-    }
+    })
 </script>
 
 <style scoped>

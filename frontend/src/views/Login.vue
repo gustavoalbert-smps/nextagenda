@@ -26,7 +26,6 @@ import App from '../App.vue';
 import axios from "axios";
 import { defineComponent, ref, reactive} from "vue";
 import { useRouter } from 'vue-router';
-import { useUserStore } from '../stores/userStore';
 
 export default defineComponent({
     name: 'Login',
@@ -36,6 +35,7 @@ export default defineComponent({
     emits: ['displayAlert'],
     setup(_, { emit }) {
         const router = useRouter();
+
         let hiddenElements = ref(true),
             name = ref(''),
             credentials = reactive({
@@ -50,12 +50,10 @@ export default defineComponent({
                     password: credentials.password
                 }, {headers: {
                     'Content-Type': 'application/json'
-                }}).then((response) => {
-                    // useUserStore().setUser(response.data);
+                }}).then(() => {
                     router.push('/');
                 });
             } catch (error) {
-                console.log(error);
                 if (error.response.data != undefined && error.response.data.erros != undefined)
                     triggerAlert(true,error.response.data.errors.message[0],'bx bx-error','alert-danger');
                 else
@@ -67,7 +65,6 @@ export default defineComponent({
             try {
                 await axios.get("/sanctum/csrf-cookie").then(async () => {
                     const response = await axios.post("/api/search-user", credentials);
-                    console.log(response);
                     if (response.data.data != null) {
                         hiddenElements.value = false;
                         name.value = response.data.data;
@@ -76,7 +73,6 @@ export default defineComponent({
                     }
                 });
             } catch (error) {
-                console.log(error);
                 triggerAlert(true,error.response.data.message,'bx bx-error','alert-danger');
             }
         }

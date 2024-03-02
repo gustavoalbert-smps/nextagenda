@@ -1,3 +1,20 @@
+<script>
+    import { defineComponent } from 'vue';
+    import { useUserStore } from '../stores/userStore';
+
+    export default defineComponent({
+        name: 'nav-component',
+        props: ['user'],
+        setup() {
+            const userStore = useUserStore();
+            
+            return {
+                userStore
+            }
+        }
+    })
+</script>
+
 <template>
     <nav id="system-nav" class="flex items-center bg-theme-dark-blue p-6 w-screen">
         <div class="flex flex-row justify-between w-full">
@@ -12,16 +29,15 @@
                 </div>
             </div>
             <div class="w-44 flex items-center">
-                <div class="">
-                    <p>teste</p>
-                </div>
+                <p class="w-80 text-white">{{user?.first_name}}</p>
+                <button @click="userStore.logout"
+                    type="submit" class="w-20 rounded bg-theme-light-blue px-1 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl hover:bg-theme-light-blue focus:outline-none focus:ring">
+                    <i class="bx bx-log-out"></i>
+                </button>
             </div>
         </div>
     </nav>
 </template>
-
-<script>
-</script>
 
 <style>
 nav {
