@@ -73,14 +73,29 @@ export default {
 
         const adjustNavBar = async () => {
             await nextTick();
-            let sidebar = document.querySelector('.sidebar'), navBar = document.querySelector('#system-nav');
+            let sidebar = document.querySelector('.sidebar'),
+                navBar = document.querySelector('#system-nav'),
+                avoidSideBar = document.querySelectorAll('.avoid-sidebar');
+
             const screenWidth = window.innerWidth;
             const sidebarWidth = sidebar.classList.contains('open') ? 250 : 78;
             const navBarWidth = screenWidth - sidebarWidth;
             const navBarLeft = sidebarWidth;
+
             navBar.style.width = navBarWidth + 'px';
             navBar.style.left = navBarLeft + 'px';
             navBar.style.transition = 'all 0.5s ease';
+
+            avoidSideBar.forEach(element => {
+                let contentPadding = 40,
+                    leftSpacing = navBarLeft + contentPadding,
+                    widthSpacing = navBarWidth - (2*contentPadding);
+
+                element.style.position = 'absolute';
+                element.style.width = widthSpacing + 'px';
+                element.style.left = leftSpacing + 'px';
+                element.style.transition = 'all 0.5s ease';
+            });
         };
 
         const displayAlert = (show, message, alertIcon, alertType) => {

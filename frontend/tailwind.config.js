@@ -23,6 +23,16 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+        const newUtilities = {
+            '.box': {
+                '@apply w-full bg-white p-10 rounded-lg shadow-md': {},
+            }
+        };
+        
+        addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 }
 
