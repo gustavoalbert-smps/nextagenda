@@ -75,11 +75,14 @@ export default {
             await nextTick();
             let sidebar = document.querySelector('.sidebar'),
                 navBar = document.querySelector('#system-nav'),
-                avoidSideBar = document.querySelectorAll('.avoid-sidebar');
+                avoidSideBar = document.querySelectorAll('.avoid-sidebar'),
+                boxMinHeight = document.querySelectorAll('.box-min-height');
 
             const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
             const sidebarWidth = sidebar.classList.contains('open') ? 250 : 78;
             const navBarWidth = screenWidth - sidebarWidth;
+            const navBarHeight = navBar.offsetHeight;
             const navBarLeft = sidebarWidth;
 
             navBar.style.width = navBarWidth + 'px';
@@ -95,6 +98,11 @@ export default {
                 element.style.width = widthSpacing + 'px';
                 element.style.left = leftSpacing + 'px';
                 element.style.transition = 'all 0.5s ease';
+            });
+
+            boxMinHeight.forEach(element => {
+                let height = navBarHeight + 40;
+                element.style.top =  height + 'px' ;
             });
         };
 

@@ -14,7 +14,6 @@ const pinia = createPinia();
 const app = createApp(App);
 
 pinia.use(({ store }) => {
-    // important! dont add a $router here
     store.router = markRaw(router)
 })
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Access\UserController;
+use App\Http\Controllers\Agenda\AgendaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,5 @@ Route::group(['namespace' => 'Access', 'prefix' => 'api'], function () {
     Route::post('/search-user', [UserController::class, 'searchUser']);
     Route::post('/cadastrar', [UserController::class, 'store']);
 })->middleware(['auth:sanctum']);
+
+Route::resource('agenda', AgendaController::class)->middleware(['auth:sanctum']);

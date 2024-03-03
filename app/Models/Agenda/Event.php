@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Agenda;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Event extends Model
 {
-    use HasFactory;
-
     protected $table = 'Events';
 
     protected $fillable = [
@@ -18,4 +16,9 @@ class Event extends Model
         'allDay',
         'description'
     ];
+
+    public function agenda(): HasOne
+    {
+        return $this->hasOne(Agenda::class);
+    }
 }

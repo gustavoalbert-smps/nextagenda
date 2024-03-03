@@ -1,28 +1,46 @@
 <script setup>
     import { ref, onMounted, defineEmits } from "vue";
     import { useUserStore } from '../stores/userStore';
+    import { useAgendaStore } from "../stores/agendaStore";
+
+    import boxComponent from "../components/box-component.vue";
+
+    import cardAgenda from "../components/card-agenda.vue";
 
     const userStore = useUserStore();
+    const agendaStore = useAgendaStore();
     const emit = defineEmits(['sendUser','adjustNavBar']);
+
+    const agendas = ref([]);
 
     onMounted(async () => {
         await userStore.getUser();
 
         emit('sendUser',userStore.user);
         emit('adjustNavBar');
+
+        await agendaStore.getAgendas();
+
+        if (agendaStore.agendas != null) {
+            agendas.value = agendaStore.agendas;
+        } else {
+            agendas.value = [{
+                lastEventTitle: "teste",
+                lastEventDescription: "teste descricao",
+                name: "Agenda 1",
+                username: "Gustavo Albert"
+            }];
+        }
     })
 </script>
 
 <template>
-    <div class="avoid-sidebar box">
-        <h1 class="text-xl text-black font-bold"><i class="bx bxs-calendar"></i> Agendas</h1>
-        
-        <h3 class="text-xs uppercase">Current lesson:</h3>
-        <h2 class="tracking-wide">
-            Object in JavaScript
-            <br />
-            (Challenge)
-        </h2>
-        <button class="bg-orange-400 py-3 px-8 mt-4 rounded text-sm font-semibold hover:bg-opacity-75">Go to lesson</button>
-    </div>
+    <boxComponent :title="'Suas Agendas'" :titleIcon="'bx bxs-calendar'">
+        <div v-for="(agenda, index) in agendas" :key="index">
+            <cardAgenda :lastEventTitle="agenda.lastEventTitle"
+                         :lastEventDescription="agenda.lastEventDescription"
+                         :name="agenda.name"
+                         :username="agenda.username" />
+        </div>
+    </boxComponent>
 </template>
