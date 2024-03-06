@@ -1,21 +1,28 @@
 <script>
     import { defineComponent } from 'vue';
+    import { RouterLink } from 'vue-router';
 
     import cardAgenda from "../components/card-agenda.vue";
 
     export default defineComponent({
         name: 'box-component',
-        props: ['title','titleIcon','body']
+        props: ['title','titleIcon','links'],
+        components: {RouterLink}
     })
 
 </script>
 
 <template>
     <div class="avoid-sidebar box box-min-height">
-        <div class="box-title">
-            <h1 class="text-xl text-black font-bold"><i :class="titleIcon"></i> {{ title }}</h1>
-            <hr />
+        <div class="box-title flex justify-between items-center text-xl">
+            <h1 class="text-black font-bold my-4"><i :class="titleIcon"></i> {{ title }}</h1>
+            <div v-for="(link, index) in links" :key="index">
+                <RouterLink :to="link.route" class="rounded border" :class="link.button">
+                    <i :class="link.icon"></i>
+                </RouterLink>
+            </div>
         </div>
+        <hr />
         
         <div class="box-body">
             <slot></slot>            

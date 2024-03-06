@@ -16,7 +16,9 @@ module.exports = {
         'theme-violet': '#451955ff',
         'theme-dark-blue': '#1d1a39ff',
         'theme-light-blue': '#56547dff',
-        'theme-dark-text': '#0e0e10'
+        'theme-dark-text': '#0e0e10',
+        'button-green': '#16a34a',
+        'button-green-border': '#15803d'
       }
     },
   },
@@ -27,7 +29,7 @@ module.exports = {
     function({ addUtilities }) {
         const newUtilities = {
             '.box': {
-                '@apply w-full bg-white p-10 rounded-lg shadow-md': {},
+                '@apply w-full bg-white pr-10 pb-10 pl-10 pt-6 rounded-lg shadow-md': {},
             }
         };
         
