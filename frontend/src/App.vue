@@ -7,14 +7,15 @@
     </AlertComponent>    
     <SidebarComponent @sidebarToggled="adjustNavBar" v-if="showSidebar"/>
     <NavComponent v-if="showNavbar" :user="user" />
-    <RouterView @trigger-alert="displayAlert" @sendUser="setUser" @adjustNavBar="adjustNavBar"/>
+    <RouterView @trigger-alert="displayAlert" @displayAlert="displayAlert" @sendUser="setUser" @adjustNavBar="adjustNavBar"/>
   </main>
 </template>
 
 <script>
-import { ref, onMounted, provide, nextTick, watch } from 'vue';
+import { ref, onMounted, nextTick, watch } from 'vue';
 import { RouterView } from "vue-router";
 import { useRoute, useRouter } from 'vue-router';
+
 import axios from "axios";
 
 import { useUserStore } from './stores/userStore';
@@ -40,29 +41,31 @@ export default {
             if (pathsToHideSideBarAndNav.includes(route.path)) {
                 showSidebar.value = false;
                 showNavbar.value = false;
-            }
-            else {
+            } else {
                 adjustNavBar();
             }
 
-            if (!pathsToHideSideBarAndNav.includes(route.path)) {
-                try {
-                    const login = await axios.get('/api/user');
+            try {
+                await userStore.getUser();
+                
+                if (pathsToHideSideBarAndNav.includes(route.path)) {
+                    if (userStore.user) router.push('/');
+                } else {
+                    if (!userStore.user) router.push('/login');
                 }
-                catch (error) {
-                    if (error.response && error.response.status === 401) {
-                        if (error.response.data.message == "Unauthenticated.") {
-                            showSidebar.value = false;
-                            showNavbar.value = false;
-                            router.push('/login');
-                        }
+            } catch (error) {
+                if (error.response && error.response.status === 401 && !pathsToHideSideBarAndNav.includes(route.path)) {
+                    if (error.response.data.message == "Unauthenticated.") {
+                        showSidebar.value = false;
+                        showNavbar.value = false;
+                        router.push('/login');
                     }
                 }
-            }
+            }            
         });
 
         watch(() => userStore.user, (user) => {
-            if (user == null) {
+            if (user == null || user == '') {
                 showSidebar.value = false;
                 showNavbar.value = false;
             } else {
@@ -106,19 +109,16 @@ export default {
             });
         };
 
-        const displayAlert = (show, message, alertIcon, alertType) => {
+        const displayAlert = (show, message, icon, type) => {
             alertMessage.value = message;
-            alertIcon.value = alertIcon;
-            alertType.value = alertType;
+            alertIcon.value = icon;
+            alertType.value = type;
             showAlert.value = show;
         };
 
         const setUser = (data) => {
             user.value = data;
         }
-
-        provide('sidebar', showSidebar);
-        provide('navbar', showNavbar);
 
         return {
             showSidebar,

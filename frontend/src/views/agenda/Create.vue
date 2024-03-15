@@ -28,32 +28,41 @@
     import { onMounted, reactive, ref } from 'vue';
 
     import boxComponent from '../../components/box-component.vue';
+    import { useAgendaStore } from '../../stores/agendaStore';
 
     export default {
-        emits: ['adjustNavBar'],
+        emits: ['adjustNavBar','displayAlert'],
         setup(_, { emit }) {
+            const agendaStore = useAgendaStore();
+
             const formData = reactive({
                 name: null,
                 membros: []
             });
 
-            const options = reactive([
-                {
-                    value: '1',
-                    label: 'A'
-                },
-                {
-                    value: '2',
-                    label: 'B'
-                }
-            ]);
+            const options = ref([]);
 
-            const submitForm = () => {
-            
+            const submitForm = async () => {
+                await agendaStore.store({
+                    name: formData.name,
+                    membros: formData.membros
+                });
             };
 
-            onMounted(() => {
+            onMounted(async () => {
                 emit('adjustNavBar');
+
+                try {
+                    await agendaStore.getFormInfo();
+                    options.value = agendaStore.membros.map(member => {
+                        return { label: member.label, value: member.value };
+                    });   
+                } catch (error) {
+                    if (error.response != undefined && error.response.data != undefined && error.response.data.message != undefined)
+                        emit('displayAlert',true,error.response.data.message,'bx bx-error','alert-danger');
+                    else
+                        emit('displayAlert',true,'Ocorreu um erro ao carregar a página.','bx bx-error','alert-danger');
+                }
             });
 
             return {

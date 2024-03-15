@@ -1,19 +1,27 @@
 <template>
-    <div class="position-absolute z-50 top-7 start-50 translate-middle-x alert alert-dismissible fade d-flex align-items-center" :class="[type,show ? 'show' : '']" role="alert">
+    <div id="alert-1" class="alert" :class="[type,show ? '' : 'hidden']" role="alert">
         <i class="mr-1.5" :class="icon"></i>
         <slot name="message">
             error
         </slot>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="ms-auto ml-1.5 -my-1.5 bg-gray-50 text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-400 p-1.5 hover:bg-gray-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" data-dismiss-target="#alert-1" aria-label="Close">
+            <i class="bx bx-x"></i>
+        </button>
     </div>
   </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
+import { initFlowbite } from 'flowbite';
 
     export default defineComponent({
         name: 'alert-component',
-        props: ['icon','type','show']        
+        props: ['icon','type','show'],
+        setup () {
+            onMounted(() => {
+                initFlowbite();
+            })
+        }
     })
 </script>
 

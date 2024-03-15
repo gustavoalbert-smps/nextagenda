@@ -12,13 +12,13 @@
     const emit = defineEmits(['sendUser','adjustNavBar']);
 
     const agendas = ref([]);
-    const links = reactive({
-                0: {
+    const links = reactive([
+                {
                     route: {name: 'create-agenda'},
                     icon: 'bx bx-calendar-plus',
                     button: 'bg-button-green border-button-green-border text-white px-2 py-1 hover:text-theme-dark-text'
                 }
-            });
+            ]);
 
     onMounted(async () => {
         await userStore.getUser();

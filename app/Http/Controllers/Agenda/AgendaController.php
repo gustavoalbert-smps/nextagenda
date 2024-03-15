@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Agenda;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agenda\Agenda;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +27,7 @@ class AgendaController extends Controller
 
             return response()->json(['message' => 'Agendas recuperadas com sucesso!', 'data' => $data]);
         } catch (\Exception $exception) {
-            Log::error("Erro ao carregar informações da página Home: " . $exception->getMessage() . $exception->getLine());
+            Log::error("Erro ao carregar informações da página Home: " . $exception->getFile() . '|' . $exception->getLine());
 
             return response()->json(['message' => 'Houve um erro ao carregar informações da página Home.'],500);
         }
@@ -44,7 +46,20 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        try {
+            $data = $request->all();
+            $data['user_id'] = $user->id;
+            $data['status'] = 1;
+            dd($data);
+    
+            $agenda = Agenda::create($data);
+
+            return response()->json(['message' => 'Agenda criada com sucesso', 'data' => $agenda]);
+        } catch (\Exception $exception) {
+            return response()->json(['message' => 'Houve um erro ao criar esta agenda'],404);
+        }
     }
 
     /**
@@ -77,5 +92,27 @@ class AgendaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function formInfo(): JsonResponse
+    {
+        $user = Auth::user();
+
+        try {
+            $data = [                
+                'membros' =>  User::all()->except($user->id)->map(function ($user) {
+                    return [
+                        'label' => $user->name,
+                        'value' => $user->id
+                    ];
+                })
+            ];
+
+            return response()->json(['message' => 'Informações para o formulário de agenda recuperadas com sucesso!', 'data' => $data]);
+        } catch (\Exception $exception) {
+            Log::error("Erro ao carregar informações do Formulário de Agenda: " . $exception->getMessage() . $exception->getLine());
+
+            return response()->json(['message' => 'Houve um erro ao carregar informações do Formulário de Agenda.'],500);
+        }
     }
 }

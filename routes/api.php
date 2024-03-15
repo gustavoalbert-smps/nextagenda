@@ -16,14 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::group(['namespace' => 'Access', 'prefix' => 'api'], function () {
-
+    
     Route::post('/search-user', [UserController::class, 'searchUser']);
     Route::post('/cadastrar', [UserController::class, 'store']);
 })->middleware(['auth:sanctum']);
 
-Route::resource('agenda', AgendaController::class)->middleware(['auth:sanctum']);
+
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/agenda/form-info', [AgendaController::class, 'formInfo']);
+    
+    Route::resource('agenda', AgendaController::class);
+})->middleware(['auth:sanctum']);

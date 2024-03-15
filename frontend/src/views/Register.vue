@@ -35,7 +35,7 @@
 
 <script>
 import App from '../App.vue';
-import axios from "axios";
+import axios, { formToJSON } from "axios";
 import {useUserStore} from '../stores/userStore.js';
 
 export default {
@@ -58,11 +58,21 @@ export default {
         async submitForm() {
             try {
                 await this.getToken();
-                const response = await axios.post("/register", this.formData);
+                const userStore = useUserStore();
+                
+                await axios.post("/register", this.formData).then(
+                    (response) => {
+                        userStore.setUser(response.data);
 
-                useUserStore().setUser(response.data);
+                        userStore.login({
+                            type: this.formData.login,
+                            password: this.formData.password
+                        });
 
-                this.$router.push('/go-to-confirmation');
+                        this.$router.push('/');
+                    }
+                );
+
             } catch (error) {
                 console.error('Erro ao enviar dados:', error);
             }

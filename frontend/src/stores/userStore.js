@@ -15,16 +15,20 @@ export const useUserStore = defineStore('user', {
             const login = await axios.get('/api/user',{headers: {'Content-Type': 'application/json'}});
             this.user = login.data;
         },
+        async login(credentials) {
+            await axios.post("/login", {
+                type: credentials.type,
+                password: credentials.password
+            }, {headers: {
+                'Content-Type': 'application/json'
+            }}).then(() => {
+                this.router.push('/');
+            });
+        },
         async logout() {
             await axios.post('/logout');
             this.user = null;
             this.router.push({name: "login"});
-
-            // const navigationResult = await this.router.push('/')
-
-            // if (navigationResult) {
-            //     console.log('erro de redirecionamento: ' + navigationResult)
-            // }
         }
     },
     getters: {
