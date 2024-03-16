@@ -30,8 +30,9 @@ export const useAgendaStore = defineStore('agenda', {
                 name: data.name,
                 membros: data.membros
             }, {headers: {'Content-Type': 'application/json'}})
-            .then(() => {
-                this.router.push('/');
+            .then((response) => {
+                if (response.success == true)
+                    this.router.push('/');
             });
         }
     }

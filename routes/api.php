@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['namespace' => 'Access', 'prefix' => 'api'], function () {
+Route::group(['namespace' => 'Access' ], function () {
     
     Route::post('/search-user', [UserController::class, 'searchUser']);
     Route::post('/cadastrar', [UserController::class, 'store']);
 })->middleware(['auth:sanctum']);
 
 
-Route::group(['prefix' => 'api'], function () {
+Route::group([], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });

@@ -52,7 +52,7 @@ class AgendaController extends Controller
             $data = $request->all();
             $data['user_id'] = $user->id;
             $data['status'] = 1;
-            dd($data);
+            return response()->json(['message' => 'Agenda criada com sucesso', 'data' => $data]);
     
             $agenda = Agenda::create($data);
 
