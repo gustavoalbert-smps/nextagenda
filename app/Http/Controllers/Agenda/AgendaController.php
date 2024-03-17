@@ -21,8 +21,8 @@ class AgendaController extends Controller
 
         try {
             $data = [
-                'agendas' => $user->agendas,
-                'sharedAgendas' => $user->sharedAgendas
+                'agendas' => $user->agendas()->with('creator')->get(),
+                'sharedAgendas' => $user->sharedAgendas()->with('creator')->get()
             ];            
 
             return response()->json(['message' => 'Agendas recuperadas com sucesso!', 'data' => $data]);
@@ -52,9 +52,10 @@ class AgendaController extends Controller
             $data = $request->all();
             $data['user_id'] = $user->id;
             $data['status'] = 1;
-            return response()->json(['message' => 'Agenda criada com sucesso', 'data' => $data]);
     
             $agenda = Agenda::create($data);
+
+            $agenda->members()->sync($data['membros']);
 
             return response()->json(['message' => 'Agenda criada com sucesso', 'data' => $agenda]);
         } catch (\Exception $exception) {

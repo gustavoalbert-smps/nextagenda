@@ -19,7 +19,7 @@ export const useAgendaStore = defineStore('agenda', {
         },
         async getAgendas() {
             const response = await axios.get('/api/agenda',{headers: {'Content-Type': 'application/json'}});
-            this.setAgendas(response.data);
+            this.setAgendas(response.data.data);
         },
         async getFormInfo() {
             const formInfo = await axios.get('/api/agenda/form-info',{headers: {'Content-Type': 'application/json'}});
@@ -31,8 +31,7 @@ export const useAgendaStore = defineStore('agenda', {
                 membros: data.membros
             }, {headers: {'Content-Type': 'application/json'}})
             .then((response) => {
-                if (response.success == true)
-                    this.router.push('/');
+                this.router.push('/');
             });
         }
     }

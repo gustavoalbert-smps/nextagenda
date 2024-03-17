@@ -24,7 +24,7 @@
 <script>
 import App from '../App.vue';
 import axios from "axios";
-import { defineComponent, ref, reactive, inject} from "vue";
+import { defineComponent, ref, reactive} from "vue";
 import { useRouter } from 'vue-router';
 
 export default defineComponent({

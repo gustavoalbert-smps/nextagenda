@@ -2,11 +2,9 @@
     import { defineComponent } from 'vue';
     import { RouterLink } from 'vue-router';
 
-    import cardAgenda from "../components/card-agenda.vue";
-
     export default defineComponent({
         name: 'box-component',
-        props: ['title','titleIcon','links'],
+        props: ['title','titleIcon','links','multiples'],
         components: {RouterLink}
     })
 
@@ -25,7 +23,8 @@
         <hr />
         
         <div class="box-body">
-            <slot></slot>            
+            <slot class="mb-4"></slot>
+            <slot name="secondBox"></slot>
         </div>
     </div>
 </template>

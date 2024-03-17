@@ -12,9 +12,10 @@
     const emit = defineEmits(['sendUser','adjustNavBar']);
 
     const agendas = ref([]);
+    const sharedAgendas = ref([]);
     const links = reactive([
                 {
-                    route: {name: 'create-agenda'},
+                    route: {name: 'agenda-create'},
                     icon: 'bx bx-calendar-plus',
                     button: 'bg-button-green border-button-green-border text-white px-2 py-1 hover:text-theme-dark-text'
                 }
@@ -26,28 +27,34 @@
         emit('sendUser',userStore.user);
         emit('adjustNavBar');
 
-        await agendaStore.getAgendas();
-
-        if (agendaStore.agendas != null) {
+        await agendaStore.getAgendas().then(() => {
             agendas.value = agendaStore.agendas;
-        } else {
-            agendas.value = [{
-                lastEventTitle: "teste",
-                lastEventDescription: "teste descricao",
-                name: "Agenda 1",
-                username: "Gustavo Albert"
-            }];
-        }
+            sharedAgendas.value = agendaStore.sharedAgendas;
+        });
     })
 </script>
 
 <template>
     <boxComponent :title="'Suas Agendas'" :titleIcon="'bx bxs-calendar'" :links="links">
         <div v-for="(agenda, index) in agendas" :key="index" class="grid gap-4 grid-cols-4">
-            <cardAgenda :lastEventTitle="agenda.lastEventTitle"
-                         :lastEventDescription="agenda.lastEventDescription"
-                         :name="agenda.name"
-                         :username="agenda.username" />
+            <cardAgenda :agenda="agenda" />
+        </div>
+        <template #secondBox>
+            <div class="mt-4">
+                <div class="box-title flex justify-between items-center text-xl">
+                    <h1 class="text-black font-bold my-4"><i class="bx bxs-calendar"></i> Agendas compartilhadas com você</h1>
+                </div>
+                <hr />
+                <div v-for="(sharedAgenda, index) in sharedAgendas" :key="index" class="grid gap-4 grid-cols-4">
+                    <cardAgenda :agenda="sharedAgenda" />
+                </div>
+                <div v-if="sharedAgendas.length == 0">
+                    <h1 class="text-2xl text-gray-500 text-center mt-4">Você não possui nenhuma agenda compartilhada.</h1>
+                </div>
+            </div>
+        </template>
+        <div v-if="agendas.length == 0">
+            <h1 class="text-2xl text-gray-500 text-center mt-4">Você ainda não cadastrou nenhuma agenda.</h1>
         </div>
     </boxComponent>
 </template>
