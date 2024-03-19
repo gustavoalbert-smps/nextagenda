@@ -59,7 +59,9 @@ class AgendaController extends Controller
 
             return response()->json(['message' => 'Agenda criada com sucesso', 'data' => $agenda]);
         } catch (\Exception $exception) {
-            return response()->json(['message' => 'Houve um erro ao criar esta agenda'],404);
+            Log::error("Erro ao criar uma agenda: " . $exception->getMessage() . $exception->getLine());
+
+            return response()->json(['message' => 'Houve um erro ao criar esta agenda'],500);
         }
     }
 
@@ -68,7 +70,19 @@ class AgendaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = Auth::user();
+
+        try {
+            $agenda = Agenda::find($id);
+            if (empty($agenda))
+                return response()->json(['message' => 'Não foi possível encontrar a agenda da solicitação.', 'data' => $agenda],204);    
+
+            return response()->json(['message' => 'Agenda resgata com sucesso', 'data' => $agenda]);
+        } catch (\Exception $exception) {
+            Log::error("Erro ao resgatar os dados da agenda (ID - ".$id."): " . $exception->getMessage() . $exception->getLine());
+
+            return response()->json(['message' => 'Houve um erro ao resgatar os dados da agenda.'],500);
+        }
     }
 
     /**

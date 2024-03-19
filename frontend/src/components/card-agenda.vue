@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <article class="mt-2.5 rounded-xl border bg-slate-800 border-slate-700 p-4 cursor-pointer" @click="router.push('/agenda/create')">
+    <article class="mt-2.5 rounded-xl border bg-slate-800 border-slate-700 p-4 cursor-pointer" @click="router.push({name: 'agenda-show', params: {id: agenda.id}})">
         <div class="flex items-center gap-4">
             <img alt=""
                 src="https://images.unsplash.com/photo-1614644147724-2d4785d69962?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"

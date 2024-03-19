@@ -6,7 +6,8 @@ export const useAgendaStore = defineStore('agenda', {
         return {
             agendas: null,
             sharedAgendas: null,
-            membros: null
+            membros: null,
+            agenda: null
         }
     },
     actions: {
@@ -17,6 +18,9 @@ export const useAgendaStore = defineStore('agenda', {
         setFormInfo(data) {
             this.membros = data.membros;
         },
+        setAgenda(data) {
+            this.agenda = data;
+        },
         async getAgendas() {
             const response = await axios.get('/api/agenda',{headers: {'Content-Type': 'application/json'}});
             this.setAgendas(response.data.data);
@@ -24,6 +28,11 @@ export const useAgendaStore = defineStore('agenda', {
         async getFormInfo() {
             const formInfo = await axios.get('/api/agenda/form-info',{headers: {'Content-Type': 'application/json'}});
             this.setFormInfo(formInfo.data.data);
+        },
+        async getAgenda(id) {
+            await axios.get(`/api/agenda/${id}`,{headers: {'Content-Type': 'application/json'}}).then((response) => {
+                this.setAgenda(response.data.data);
+            });
         },
         async store(data) {
             await axios.post("/api/agenda", {

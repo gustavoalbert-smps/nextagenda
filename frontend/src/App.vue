@@ -16,8 +16,6 @@ import { ref, onMounted, nextTick, watch } from 'vue';
 import { RouterView } from "vue-router";
 import { useRoute, useRouter } from 'vue-router';
 
-import axios from "axios";
-
 import { useUserStore } from './stores/userStore';
 
 import AlertComponent from './components/alert-component.vue';
@@ -133,6 +131,6 @@ export default {
             setUser
         };
     },
-    components: { AlertComponent, SidebarComponent, NavComponent }
+    components: { AlertComponent, SidebarComponent, NavComponent, RouterView }
 };
 </script>

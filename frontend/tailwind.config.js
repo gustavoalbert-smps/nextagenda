@@ -19,7 +19,9 @@ module.exports = {
         'theme-light-blue': '#56547dff',
         'theme-dark-text': '#0e0e10',
         'button-green': '#16a34a',
-        'button-green-border': '#15803d'
+        'button-green-border': '#15803d',
+        'button-red': '#dc2626',
+        'button-red-border': '#b91c1c'
       }
     },
   },
